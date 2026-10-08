@@ -124,4 +124,4 @@ HTTP-without-HTTPS, end-of-life software, level thresholds), the service
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+[MIT](LICENSE) © Angelo David Padilla Romero
