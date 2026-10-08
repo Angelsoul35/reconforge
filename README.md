@@ -11,6 +11,12 @@ surface report rather than a pile of disconnected tool output.
 > and synthetic** — they scan nobody — so the tool runs end to end for
 > development and demos without touching any real host.
 
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)](.github/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](pyproject.toml)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+---
+
 ## The problem it solves
 
 Recon output is fragmented: a subdomain tool, a port scanner, a tech
