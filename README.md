@@ -89,10 +89,13 @@ curl -s -X POST localhost:8000/assess -H 'content-type: application/json' \
 ```python
 class DNSCollector:
     name = "dns"
-    def collect(self, target: str) -> list[Asset]:
-        ...  # query DNS, return Asset(host=..., ips=[...], sources={self.name})
 
-service = ReconService(host_collectors=[DNSCollector(), PortCollector(), ...])
+    def collect(self, target: str) -> list[Asset]:
+        # query DNS; return Asset(host=..., ips=[...], sources={self.name})
+        ...
+
+
+service = ReconService(host_collectors=[DNSCollector(), PortCollector()])
 ```
 
 Any object with a `name` and a `collect(target) -> list[Asset]` satisfies the

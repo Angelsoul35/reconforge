@@ -19,9 +19,21 @@ from .models import Asset, Port
 
 # Service names by well-known port, for labelling synthetic findings.
 _SERVICES = {
-    21: "ftp", 22: "ssh", 23: "telnet", 25: "smtp", 80: "http", 110: "pop3",
-    143: "imap", 443: "https", 445: "smb", 3306: "mysql", 3389: "rdp",
-    5432: "postgres", 6379: "redis", 8080: "http-alt", 27017: "mongodb",
+    21: "ftp",
+    22: "ssh",
+    23: "telnet",
+    25: "smtp",
+    80: "http",
+    110: "pop3",
+    143: "imap",
+    443: "https",
+    445: "smb",
+    3306: "mysql",
+    3389: "rdp",
+    5432: "postgres",
+    6379: "redis",
+    8080: "http-alt",
+    27017: "mongodb",
 }
 
 

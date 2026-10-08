@@ -59,9 +59,7 @@ def score_asset(asset: Asset) -> AssetExposure:
     # HTTP served without HTTPS alongside it.
     ports = asset.open_ports()
     if 80 in ports and 443 not in ports:
-        findings.append(
-            ExposureFinding("HTTP served without HTTPS", Severity.MEDIUM, 2)
-        )
+        findings.append(ExposureFinding("HTTP served without HTTPS", Severity.MEDIUM, 2))
 
     for issue in asset.tls_issues:
         if issue in _TLS_RULES:

@@ -17,6 +17,7 @@ mínima.
 ```python
 class Collector(Protocol):
     name: str
+
     def collect(self, target: str) -> list[Asset]: ...
 ```
 

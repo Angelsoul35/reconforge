@@ -24,9 +24,7 @@ class ReconService:
     ) -> None:
         self.settings = settings or get_settings()
         self.discovery = discovery or SubdomainCollector()
-        self.host_collectors = host_collectors or [
-            PortCollector(), TechCollector(), TLSCollector()
-        ]
+        self.host_collectors = host_collectors or [PortCollector(), TechCollector(), TLSCollector()]
 
     def gather(self, target: str) -> list[Asset]:
         # 1) discover hosts, 2) enrich each host, 3) normalise per host.
