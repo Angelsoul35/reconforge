@@ -22,11 +22,11 @@ Protocol, and the exposure ranking is consistent and reproducible.
 
 ## Architecture
 
-```
- collectors (pluggable)        normalize              score
- ──────────────────────    ─────────────────    ────────────────────
- subdomains / ports /   ─▶  merge + dedup    ─▶  deterministic rules
- tech / tls (+ your own)    per host (Asset)      -> exposure + reasons
+```mermaid
+flowchart LR
+    A[Collectors<br/>subdomains, ports, tech, tls] -->|partial assets| B[Normalize<br/>merge + dedup per host]
+    B -->|one Asset per host| C[Score<br/>deterministic rules]
+    C --> D[Exposure + reasons]
 ```
 
 1. **Collect (`collectors.py`).** A `Collector` takes a target and returns partial

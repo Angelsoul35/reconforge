@@ -18,10 +18,13 @@ them.
 
 ## Data flow
 
-```
- target ─▶ discovery collector ─▶ hosts
-            each host ─▶ [port, tech, tls] collectors ─▶ partial assets
-            normalize(all) ─▶ one Asset per host ─▶ score_asset ─▶ ranked report
+```mermaid
+flowchart LR
+    A[Target] --> B[Discovery collector]
+    B -->|hosts| C[Per-host collectors<br/>port, tech, tls]
+    C -->|partial assets| D[normalize<br/>one Asset per host]
+    D --> E[score_asset]
+    E --> F[Ranked report]
 ```
 
 ## One model, many sources
