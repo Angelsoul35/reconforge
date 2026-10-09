@@ -45,12 +45,12 @@ class Asset:
 class ExposureFinding:
     reason: str
     severity: Severity
-    weight: int
+    weight: float  # integer rule weights, or calibrated real weights (see severity_model)
 
 
 @dataclass
 class AssetExposure:
     host: str
-    score: int
+    score: float
     level: Severity
     findings: list[ExposureFinding] = field(default_factory=list)

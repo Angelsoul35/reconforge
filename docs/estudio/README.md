@@ -14,6 +14,10 @@ qué" de cada decisión en tu idioma.
    por host y el motor de puntuación de exposición basado en reglas.
 3. **[03-preguntas-de-entrevista.md](03-preguntas-de-entrevista.md)** — preguntas
    típicas y cómo responderlas con seguridad.
+4. **[04-validacion-con-datos-reales.md](04-validacion-con-datos-reales.md)** — cómo
+   se valida el motor de puntuación contra el estándar CVSS sobre 12 000 CVEs
+   reales del NVD: etiqueta de oro con fórmula, baseline, validación cruzada vs
+   held-out, sobre/subajuste, control negativo y derivación del veredicto.
 
 ## Resumen en una frase
 

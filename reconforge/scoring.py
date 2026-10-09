@@ -40,12 +40,36 @@ _RISKY_TECH = {
 
 _LEVELS = [(12, Severity.CRITICAL), (8, Severity.HIGH), (4, Severity.MEDIUM), (1, Severity.LOW)]
 
+# A threshold ladder: (minimum score, level), highest first; below the last one the
+# level is INFO. The port/TLS/tech rules use ``_LEVELS``; a calibrated model (see
+# ``severity_model``) supplies its own ladder on its own score scale.
+LevelLadder = list[tuple[float, Severity]]
 
-def _level(score: int) -> Severity:
-    for threshold, level in _LEVELS:
+
+def level_for(score: float, levels: LevelLadder = _LEVELS) -> Severity:
+    """Map a numeric exposure score to a severity level by threshold."""
+    for threshold, level in levels:
         if score >= threshold:
             return level
     return Severity.INFO
+
+
+def aggregate(
+    host: str, findings: list[ExposureFinding], levels: LevelLadder = _LEVELS
+) -> AssetExposure:
+    """The scoring core: exposure is the sum of finding weights, mapped to a level.
+
+    Every point in the score is one explicit finding, so an ``AssetExposure`` is
+    always decomposable into the reasons behind it. Both the built-in rule set and
+    the calibrated severity model score through this one function.
+    """
+    score = sum(f.weight for f in findings)
+    return AssetExposure(host=host, score=score, level=level_for(score, levels), findings=findings)
+
+
+# Retained for backward compatibility with callers of the private helper.
+def _level(score: float) -> Severity:
+    return level_for(score, _LEVELS)
 
 
 def score_asset(asset: Asset) -> AssetExposure:
@@ -77,5 +101,4 @@ def score_asset(asset: Asset) -> AssetExposure:
     if "admin-panel" in asset.tags:
         findings.append(ExposureFinding("administrative panel exposed", Severity.HIGH, 3))
 
-    score = sum(f.weight for f in findings)
-    return AssetExposure(host=asset.host, score=score, level=_level(score), findings=findings)
+    return aggregate(asset.host, findings)
